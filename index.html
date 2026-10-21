@@ -338,14 +338,21 @@
       <article class="row">
         <div class="meta"><strong>Jun 2026</strong>Team of 3</div>
         <div>
-          <h3>Airline Intelligence Platform</h3>
-          <p class="sub">A serverless AWS data lake for aviation analytics. I owned ingestion and the data lake layers.</p>
+          <h3><a href="https://github.com/AkshatDhiman07/Airline-Intelligence" target="_blank" rel="noopener">Airline Intelligence Platform</a></h3>
+          <p class="sub">A serverless AWS analytics platform for flight delays. I owned ingestion and the data lake layers.</p>
           <ul>
-            <li>Landed 3M historical flight records and a live flight API feed in Hive-partitioned S3, polled by EventBridge and Lambda.</li>
-            <li>Kept API keys in Secrets Manager, encrypted storage with KMS, and queried S3 directly in Athena through the Glue Data Catalog.</li>
-            <li>Runs for under $1 a month, because you only pay when data moves or queries run.</li>
+            <li>Landed 3M historical BTS flight records and a live Aviationstack feed in a Hive-partitioned S3 data lake, with EventBridge triggering a Lambda ingester every 12 hours.</li>
+            <li>Kept API keys in Secrets Manager, scoped IAM roles per service, and exposed the lake to Athena SQL views with no copy step.</li>
+            <li>Runs for about $0.40 a month, because you only pay when data moves or queries run.</li>
           </ul>
-          <p class="stack"><b>Stack:</b> AWS Lambda, EventBridge, S3, Glue, Athena, Secrets Manager, KMS, Python</p>
+          <p class="stack"><b>Stack:</b> AWS Lambda, EventBridge, S3, Athena, Secrets Manager, CloudWatch, IAM, Python</p>
+          <div class="links">
+            <a href="https://github.com/AkshatDhiman07/Airline-Intelligence" target="_blank" rel="noopener">View the code</a>
+            <a href="https://www.youtube.com/watch?v=ywQuLzKjexc" target="_blank" rel="noopener">Watch the demo</a>
+          </div>
+          <div class="shots" style="grid-template-columns: 1fr;">
+            <figure><img loading="lazy" src="https://github.com/AkshatDhiman07/Airline-Intelligence/raw/feature/dev-1.0/docs/Screenshots/system_architecture.png" alt="Airline Intelligence system architecture on AWS" onerror="this.closest('figure').remove()" style="aspect-ratio:auto; object-fit:contain;"><figcaption>System architecture</figcaption></figure>
+          </div>
         </div>
       </article>
 
