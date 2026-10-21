@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aaditya Kumar Singh | Data Engineer</title>
+<meta name="description" content="Data engineer with 5+ years in banking data. MS Data Science at Northeastern. Seeking a Spring or Fall 2027 data engineering co-op.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F4F7FB;
+    --surface: #FFFFFF;
+    --ink: #12233B;
+    --muted: #586A82;
+    --line: #D6DEE9;
+    --accent: #D98A1E;
+    --accent-soft: #FBEBD3;
+    --link: #1F5FCC;
+    color-scheme: light;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0D1626;
+      --surface: #132036;
+      --ink: #E7EDF6;
+      --muted: #9AA9BE;
+      --line: #24354F;
+      --accent: #F2B04A;
+      --accent-soft: #3A2C16;
+      --link: #86B4FF;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0D1626;
+    --surface: #132036;
+    --ink: #E7EDF6;
+    --muted: #9AA9BE;
+    --line: #24354F;
+    --accent: #F2B04A;
+    --accent-soft: #3A2C16;
+    --link: #86B4FF;
+    color-scheme: dark;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--link); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px); }
+
+  /* Top bar */
+  .top { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; gap: 16px; flex-wrap: wrap; }
+  .mark { font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em; color: var(--ink); text-decoration: none; }
+  .nav { display: flex; gap: clamp(14px, 3vw, 28px); flex-wrap: wrap; }
+  .nav a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+  .nav a:hover { color: var(--ink); }
+
+  /* Hero */
+  .hero { padding: clamp(40px, 8vw, 88px) 0 clamp(36px, 6vw, 64px); }
+  .status { display: inline-flex; align-items: center; gap: 10px; font-size: 0.92rem; font-weight: 500; color: var(--ink);
+    background: var(--surface); border: 1px solid var(--line); padding: 6px 14px 6px 10px; border-radius: 999px; }
+  .status .dot { width: 9px; height: 9px; border-radius: 50%; background: #2FA36B; box-shadow: 0 0 0 4px rgba(47,163,107,.18); }
+  h1 { font-size: clamp(2.6rem, 7vw, 5.2rem); line-height: 1.0; letter-spacing: -0.035em; font-weight: 800; margin: 26px 0 0; max-width: 14ch; }
+  .lede { font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--muted); max-width: 58ch; margin: 22px 0 0; line-height: 1.55; }
+  .lede strong { color: var(--ink); font-weight: 600; }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; font: inherit; font-weight: 600; font-size: 0.98rem;
+    padding: 11px 20px; border-radius: 10px; text-decoration: none; border: 1px solid var(--line); color: var(--ink); background: var(--surface); }
+  .btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .btn:hover { border-color: var(--ink); }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+
+  /* Pipeline: the one memorable moment */
+  .pipe { margin-top: clamp(44px, 7vw, 72px); background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: clamp(20px, 3vw, 30px); }
+  .pipe-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+  .pipe-head h2 { font-size: 1.05rem; margin: 0; font-weight: 700; letter-spacing: -0.01em; }
+  .pipe-head p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+  .flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; position: relative; }
+  .flow li { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; padding: 0 4px; }
+  .flow li::after { content: ""; position: absolute; top: 22px; left: calc(50% + 24px); right: calc(-50% + 24px); height: 2px; background: var(--line); }
+  .flow li:last-child::after { display: none; }
+  .node { width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--line); background: var(--bg); display: grid; place-items: center;
+    font-weight: 800; font-size: 0.9rem; color: var(--muted); position: relative; z-index: 1; }
+  .flow .name { font-weight: 700; font-size: 0.98rem; }
+  .flow .role { color: var(--muted); font-size: 0.84rem; line-height: 1.35; max-width: 14ch; }
+  @media (prefers-reduced-motion: no-preference) {
+    .node { animation: pulse 6s ease-in-out infinite; }
+    .flow li::after { background-image: linear-gradient(90deg, var(--accent), var(--accent)); background-repeat: no-repeat; background-size: 0% 100%; animation: wire 6s ease-in-out infinite; }
+    .flow li:nth-child(1) .node, .flow li:nth-child(1)::after { animation-delay: 0s; }
+    .flow li:nth-child(2) .node, .flow li:nth-child(2)::after { animation-delay: .8s; }
+    .flow li:nth-child(3) .node, .flow li:nth-child(3)::after { animation-delay: 1.6s; }
+    .flow li:nth-child(4) .node, .flow li:nth-child(4)::after { animation-delay: 2.4s; }
+    .flow li:nth-child(5) .node, .flow li:nth-child(5)::after { animation-delay: 3.2s; }
+    .flow li:nth-child(6) .node { animation-delay: 4.0s; }
+  }
+  @keyframes pulse {
+    0%, 100% { border-color: var(--line); color: var(--muted); background: var(--bg); }
+    6%, 14% { border-color: var(--accent); color: var(--ink); background: var(--accent-soft); }
+    24% { border-color: var(--line); color: var(--muted); background: var(--bg); }
+  }
+  @keyframes wire {
+    0%, 8% { background-size: 0% 100%; background-position: left; }
+    16% { background-size: 100% 100%; background-position: left; }
+    17% { background-size: 100% 100%; background-position: right; }
+    26%, 100% { background-size: 0% 100%; background-position: right; }
+  }
+  @media (max-width: 720px) {
+    .flow { grid-template-columns: repeat(3, 1fr); row-gap: 26px; }
+    .flow li:nth-child(3)::after { display: none; }
+  }
+
+  /* Sections */
+  section { padding: clamp(48px, 8vw, 88px) 0 0; }
+  .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-bottom: 2px solid var(--ink); padding-bottom: 12px; margin-bottom: 8px; }
+  .sec-head h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); letter-spacing: -0.025em; margin: 0; font-weight: 800; }
+  .sec-head p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+  .row { display: grid; grid-template-columns: 220px 1fr; gap: clamp(16px, 4vw, 48px); padding: 30px 0; border-bottom: 1px solid var(--line); }
+  .row:last-child { border-bottom: 0; }
+  .meta { color: var(--muted); font-size: 0.95rem; font-variant-numeric: tabular-nums; }
+  .meta strong { display: block; color: var(--ink); font-size: 1.05rem; font-weight: 700; margin-bottom: 2px; }
+  .row h3 { margin: 0; font-size: clamp(1.2rem, 2.4vw, 1.45rem); letter-spacing: -0.015em; line-height: 1.25; }
+  .row h3 a { color: var(--ink); text-decoration-color: var(--line); text-decoration-thickness: 2px; }
+  .row h3 a:hover { text-decoration-color: var(--accent); }
+  .sub { color: var(--muted); margin: 4px 0 0; font-size: 0.98rem; }
+  .row ul { margin: 14px 0 0; padding-left: 1.1em; }
+  .row li { margin: 6px 0; max-width: 72ch; }
+  .row li::marker { color: var(--accent); }
+  .row p { margin: 12px 0 0; max-width: 70ch; }
+  .stack { margin-top: 14px; color: var(--muted); font-size: 0.92rem; }
+  .stack b { color: var(--ink); font-weight: 600; }
+  .note { display: inline-block; margin-top: 12px; font-size: 0.88rem; color: var(--muted); background: var(--accent-soft); padding: 2px 10px; border-radius: 6px; }
+
+  .feature { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: clamp(22px, 3vw, 32px); margin: 24px 0 8px;
+    display: grid; grid-template-columns: 220px 1fr; gap: clamp(16px, 4vw, 48px); }
+  .feature .flag { display: inline-block; font-size: 0.85rem; font-weight: 600; color: var(--ink); background: var(--accent-soft); padding: 2px 10px; border-radius: 6px; margin-bottom: 10px; }
+
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 28px 40px; padding-top: 26px; }
+  .skills h3 { font-size: 1rem; margin: 0 0 6px; }
+  .skills p { margin: 0; color: var(--muted); }
+
+  .edu { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px 40px; padding-top: 26px; }
+  .edu h3 { margin: 0; font-size: 1.1rem; }
+  .edu p { margin: 4px 0 0; color: var(--muted); }
+
+  .contact { margin-top: clamp(56px, 9vw, 100px); padding: clamp(30px, 5vw, 56px); background: var(--ink); color: var(--bg); border-radius: 22px; }
+  .contact h2 { font-size: clamp(1.8rem, 4.4vw, 3rem); line-height: 1.08; letter-spacing: -0.03em; margin: 0; max-width: 18ch; font-weight: 800; }
+  .contact p { color: color-mix(in srgb, var(--bg) 78%, transparent); max-width: 56ch; margin: 16px 0 0; }
+  .contact .actions .btn { background: transparent; color: var(--bg); border-color: color-mix(in srgb, var(--bg) 35%, transparent); }
+  .contact .actions .btn.primary { background: var(--accent); color: #1A1206; border-color: var(--accent); }
+  footer { padding: 28px 0 40px; color: var(--muted); font-size: 0.9rem; }
+
+  @media (max-width: 760px) {
+    .row, .feature { grid-template-columns: 1fr; gap: 8px; }
+    .meta strong { display: inline; margin-right: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <a class="mark" href="#top" aria-label="Aaditya Kumar Singh, back to top">Aaditya Kumar Singh</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <span class="status"><span class="dot" aria-hidden="true"></span>Open to data engineering co-ops for Spring 2027 (Jan to Jun) or Fall 2027 (Jul to Dec)</span>
+      <h1>I build the pipelines decisions run on.</h1>
+      <p class="lede">Data engineer and ETL developer with <strong>5+ years</strong> of production pipelines for <strong>Citibank</strong> and <strong>Commonwealth Bank of Australia</strong>. Now an MS Data Science student at Northeastern, building streaming systems in the open.</p>
+      <div class="actions">
+        <a class="btn primary" href="#projects">See my work</a>
+        <a class="btn" href="https://github.com/aaditya2504" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+          GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/aaditya-singh-66b269190" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+          LinkedIn</a>
+        <a class="btn" href="mailto:singh.aadit@northeastern.edu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          Email</a>
+      </div>
+
+      <div class="pipe" aria-label="Streaming lakehouse architecture">
+        <div class="pipe-head">
+          <h2>My streaming lakehouse, end to end</h2>
+          <p>A row changes in Postgres. About 60 seconds later, it’s queryable in Trino.</p>
+        </div>
+        <ol class="flow">
+          <li><span class="node" aria-hidden="true">1</span><span class="name">Postgres</span><span class="role">Source database, changes in the write-ahead log</span></li>
+          <li><span class="node" aria-hidden="true">2</span><span class="name">Debezium</span><span class="role">Captures every insert, update, and delete</span></li>
+          <li><span class="node" aria-hidden="true">3</span><span class="name">Kafka</span><span class="role">Durable event log between producer and consumer</span></li>
+          <li><span class="node" aria-hidden="true">4</span><span class="name">Spark</span><span class="role">Structured Streaming in 60-second micro-batches</span></li>
+          <li><span class="node" aria-hidden="true">5</span><span class="name">Iceberg</span><span class="role">Bronze, Silver, Gold tables with ACID and time travel</span></li>
+          <li><span class="node" aria-hidden="true">6</span><span class="name">Trino</span><span class="role">SQL over the lake, Gold models built in dbt</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <section id="projects" aria-labelledby="projects-h">
+      <div class="sec-head"><h2 id="projects-h">Projects</h2><p>Built for real problems, documented for real readers.</p></div>
+
+      <article class="feature">
+        <div class="meta"><span class="flag">Flagship</span><strong>Jul 2026</strong>Solo project</div>
+        <div>
+          <h3><a href="https://github.com/aaditya2504/streaming-lakehouse" target="_blank" rel="noopener">Streaming Lakehouse (CDC Pipeline)</a></h3>
+          <p class="sub">Real-time change data capture for a banking ledger, across 8 Docker services.</p>
+          <ul>
+            <li>Streams every insert, update, and delete from Postgres through Debezium and Kafka into an append-only Iceberg Bronze log with Spark Structured Streaming.</li>
+            <li>Builds Silver and Gold models in dbt on Trino, with window-function deduplication, SHA-256 PII masking, and uniqueness, not-null, and accepted-values tests.</li>
+            <li>Automates Iceberg table maintenance: small-file compaction, manifest rewrites, and snapshot expiry.</li>
+          </ul>
+          <p class="stack"><b>Stack:</b> Postgres, Debezium, Kafka, Spark, Iceberg, MinIO, Trino, dbt, Docker</p>
+        </div>
+      </article>
+
+      <article class="row">
+        <div class="meta"><strong>Oct 2026</strong>Solo project</div>
+        <div>
+          <h3><a href="https://github.com/aaditya2504/job-radar" target="_blank" rel="noopener">job-radar</a></h3>
+          <p class="sub">An internship discovery pipeline that runs on a schedule and pushes the best matches to my phone.</p>
+          <ul>
+            <li>Ingests 1,000+ postings from Simplify and Workday career sites, deduplicates them across sources, and drops roles that fail work-authorization rules before any scoring.</li>
+            <li>Scores fit against my resume with a free local skill matcher, with Claude scoring as an optional upgrade and automatic fallback.</li>
+            <li>Zero dependencies, 27 offline tests, and CI across Python 3.11 to 3.13.</li>
+          </ul>
+          <p class="stack"><b>Stack:</b> Python, Claude API, GitHub Actions, ntfy</p>
+        </div>
+      </article>
+
+      <article class="row">
+        <div class="meta"><strong>Jun 2026</strong>Team of 3</div>
+        <div>
+          <h3>Airline Intelligence Platform</h3>
+          <p class="sub">A serverless AWS data lake for aviation analytics. I owned ingestion and the data lake layers.</p>
+          <ul>
+            <li>Landed 3M historical flight records and a live flight API feed in Hive-partitioned S3, polled by EventBridge and Lambda.</li>
+            <li>Kept API keys in Secrets Manager, encrypted storage with KMS, and queried S3 directly in Athena through the Glue Data Catalog.</li>
+            <li>Runs for under $1 a month, because you only pay when data moves or queries run.</li>
+          </ul>
+          <p class="stack"><b>Stack:</b> AWS Lambda, EventBridge, S3, Glue, Athena, Secrets Manager, KMS, Python</p>
+        </div>
+      </article>
+
+      <article class="row">
+        <div class="meta"><strong>Apr 2026</strong>Solo project</div>
+        <div>
+          <h3>Restaurant Analytics Database</h3>
+          <p class="sub">Relational design, cloud ETL, and a concurrency experiment that shows why transactions matter.</p>
+          <ul>
+            <li>Designed a 3NF MySQL schema on Aiven Cloud and loaded 209K+ restaurant visits with an R ETL pipeline.</li>
+            <li>Ran 4 concurrent loaders with and without transactions, exposing read-then-write races that caused duplicate and partial inserts.</li>
+            <li>Built a 5-table star schema from the Sakila database with OLAP queries on revenue, category, and staff.</li>
+          </ul>
+          <p class="stack"><b>Stack:</b> MySQL, R, SQLite</p>
+          <span class="note">Coursework repository, available on request</span>
+        </div>
+      </article>
+
+      <article class="row">
+        <div class="meta"><strong>Mar 2026</strong>Team of 5</div>
+        <div>
+          <h3><a href="https://github.com/aaditya2504/brfss-mental-health-analysis" target="_blank" rel="noopener">Social Determinants of Mental Health</a></h3>
+          <p class="sub">Survey-weighted analysis of 200K+ CDC BRFSS respondents across 33 states.</p>
+          <ul>
+            <li>Used survey-weighted regression, ANOVA with Tukey HSD, and ordinal logistic models with odds ratios.</li>
+            <li>Found loneliness to be the strongest modifiable predictor of poor mental health days.</li>
+          </ul>
+          <p class="stack"><b>Stack:</b> R, survey, R Markdown</p>
+        </div>
+      </article>
+    </section>
+
+    <section id="experience" aria-labelledby="exp-h">
+      <div class="sec-head"><h2 id="exp-h">Experience</h2><p>5+ years in financial services data.</p></div>
+
+      <article class="row">
+        <div class="meta"><strong>Mar 2024 – Sep 2025</strong>Bengaluru, India</div>
+        <div>
+          <h3>Senior Data Management Analyst, Synechron</h3>
+          <p class="sub">Client: Commonwealth Bank of Australia. Acting lead of a 5-person engineering team.</p>
+          <ul>
+            <li>Optimized 12+ SQL pipelines processing 500K+ records a day, raising throughput 25%.</li>
+            <li>Refactored 50+ stored procedures across Oracle and Teradata, cutting average query time 40%.</li>
+            <li>Sustained a 99.5% pipeline uptime SLA, resolving 30+ production incidents through root cause analysis.</li>
+            <li>Queried large datasets in S3 with Athena, reducing ad hoc query time 30%.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="row">
+        <div class="meta"><strong>Dec 2019 – Mar 2024</strong>Noida, India</div>
+        <div>
+          <h3>Team Lead / ETL Developer, Empaxis Data Management</h3>
+          <p class="sub">Client: Citibank. Led a 6-person team on a trade reconciliation platform.</p>
+          <ul>
+            <li>Built end-to-end ETL workflows handling 200K+ daily transactions.</li>
+            <li>Architected Informatica and PL/SQL pipelines that eliminated 60% of manual processing.</li>
+            <li>Designed normalized Oracle schemas and indexes that sped up reporting queries 35%.</li>
+            <li>Mentored 10+ junior engineers and wrote the team’s standard runbooks.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="row">
+        <div class="meta"><strong>Sep 2026 – Present</strong>Boston, MA</div>
+        <div>
+          <h3>Teaching Assistant, Northeastern University</h3>
+          <p class="sub">DS 5110 Essentials of Data Science, Khoury College.</p>
+          <ul>
+            <li>Answer students’ questions on Python and statistics during weekly office hours.</li>
+            <li>Grade assignments across two weekly cycles against a consistent rubric.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <section id="skills" aria-labelledby="skills-h">
+      <div class="sec-head"><h2 id="skills-h">Skills</h2><p>What I reach for, grouped by job.</p></div>
+      <div class="skills">
+        <div><h3>Languages</h3><p>Python, SQL, PL/SQL, R, Java, Bash</p></div>
+        <div><h3>Streaming and CDC</h3><p>Kafka, Debezium, Spark Structured Streaming</p></div>
+        <div><h3>Processing and modeling</h3><p>Spark, dbt, Informatica, dimensional modeling, star schemas</p></div>
+        <div><h3>Storage and query</h3><p>PostgreSQL, Oracle, Teradata, MySQL, Snowflake, Iceberg, Trino</p></div>
+        <div><h3>Cloud and tooling</h3><p>AWS (S3, Glue, Athena, Lambda, Redshift, EventBridge), Docker, Git, GitHub Actions, Linux</p></div>
+        <div><h3>Analysis</h3><p>pandas, NumPy, scikit-learn, statistical modeling, Tableau, Power BI</p></div>
+      </div>
+    </section>
+
+    <section id="education" aria-labelledby="edu-h">
+      <div class="sec-head"><h2 id="edu-h">Education and certification</h2></div>
+      <div class="edu">
+        <div><h3>MS in Data Science</h3><p>Northeastern University, Khoury College. Jan 2026 to May 2028. GPA 4.0.</p></div>
+        <div><h3>B.Tech in Computer Science and Engineering</h3><p>Maulana Abul Kalam Azad University of Technology, India. 2016 to 2020.</p></div>
+        <div><h3>AWS Certified Data Engineer, Associate</h3><p>Amazon Web Services, May 2025.</p></div>
+      </div>
+    </section>
+
+    <div class="contact" id="contact">
+      <h2>Need a data engineer who has run pipelines in production?</h2>
+      <p>I’m looking for a data engineering or analytics engineering co-op for Spring 2027 (January to June) or Fall 2027 (July to December). The fastest way to reach me is email.</p>
+      <div class="actions">
+        <a class="btn primary" href="mailto:singh.aadit@northeastern.edu">Email singh.aadit@northeastern.edu</a>
+        <a class="btn" href="https://www.linkedin.com/in/aaditya-singh-66b269190" target="_blank" rel="noopener">Connect on LinkedIn</a>
+        <a class="btn" href="https://github.com/aaditya2504" target="_blank" rel="noopener">View GitHub</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>Aaditya Kumar Singh, Boston, MA</footer>
+</div>
+</body>
+</html>
