@@ -214,6 +214,50 @@
   .contact .actions .btn { background: transparent; color: var(--bg); border-color: color-mix(in srgb, var(--bg) 35%, transparent); }
   .contact .actions .btn:hover { border-color: var(--bg); }
   footer { padding: 28px 0 40px; color: var(--muted); font-size: 0.9rem; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  /* Project cards */
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; margin-top: 16px;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+  .card:hover, .card.open { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); box-shadow: 0 10px 28px rgba(18, 35, 59, .08); }
+  @media (prefers-reduced-motion: no-preference) { .card:hover { transform: translateY(-2px); } }
+  .card-head { display: grid; grid-template-columns: 200px 1fr auto; gap: clamp(16px, 4vw, 40px); padding: clamp(20px, 3vw, 30px); cursor: pointer; align-items: start; }
+  .card h3 { margin: 0; font-size: clamp(1.2rem, 2.4vw, 1.45rem); letter-spacing: -0.015em; line-height: 1.25; }
+  .card h3 a { color: var(--ink); text-decoration-color: var(--line); text-decoration-thickness: 2px; }
+  .card h3 a:hover { text-decoration-color: var(--accent); }
+  .card .stack { margin-top: 10px; }
+  .toggle { display: inline-flex; align-items: center; gap: 6px; font: inherit; font-size: 0.9rem; font-weight: 600; color: var(--ink);
+    background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px 7px 14px; cursor: pointer; white-space: nowrap; }
+  .toggle:hover { border-color: var(--ink); }
+  .toggle svg { width: 16px; height: 16px; transition: transform .25s ease; }
+  .card.open .toggle svg { transform: rotate(180deg); }
+  .details { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .32s ease; }
+  .card.open .details { grid-template-rows: 1fr; }
+  .details-inner { overflow: hidden; }
+  .details-body { padding: 0 clamp(20px, 3vw, 30px) clamp(20px, 3vw, 30px) calc(clamp(20px, 3vw, 30px) + 200px + clamp(16px, 4vw, 40px)); }
+  .details-body ul { margin: 0; padding-left: 1.1em; }
+  .details-body li { margin: 6px 0; max-width: 72ch; }
+  .details-body li::marker { color: var(--accent); }
+  .expand-all { font: inherit; font-size: 0.92rem; font-weight: 600; color: var(--ink); background: var(--surface); border: 1px solid var(--line);
+    border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+  .expand-all:hover { border-color: var(--ink); }
+  .shots.one { grid-template-columns: 1fr; }
+  .shots.one img { aspect-ratio: auto; object-fit: contain; max-height: 420px; }
+  .shot-btn { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 10px; }
+  .shot-btn img { transition: transform .2s ease, box-shadow .2s ease; }
+  .shot-btn:hover img { box-shadow: 0 8px 22px rgba(18, 35, 59, .16); }
+  @media (max-width: 760px) {
+    .card-head { grid-template-columns: 1fr; gap: 10px; }
+    .card-head .toggle { justify-self: start; }
+    .details-body { padding: 0 clamp(20px, 3vw, 30px) clamp(20px, 3vw, 30px); }
+  }
+
+  /* Screenshot lightbox */
+  .lightbox { border: 0; padding: 0; background: transparent; max-width: min(1200px, 94vw); max-height: 92vh; }
+  .lightbox::backdrop { background: rgba(8, 14, 25, .82); }
+  .lightbox img { display: block; max-width: 100%; max-height: 82vh; border-radius: 12px; margin: 0 auto; background: #fff; }
+  .lightbox p { color: #E7EDF6; text-align: center; margin: 12px 0 0; font-size: 0.95rem; }
+  .lightbox .close { position: fixed; top: calc(16px + env(safe-area-inset-top, 0px)); right: 16px; width: 44px; height: 44px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.3); background: rgba(8,14,25,.6); color: #fff; font-size: 1.4rem; cursor: pointer; line-height: 1; }
 </style>
 </head>
 <body>
@@ -297,90 +341,142 @@
     </section>
 
     <section id="work" aria-labelledby="work-h">
-      <div class="sec-head"><h2 id="work-h">Selected work</h2><p>Built for real problems, documented for real readers.</p></div>
-
-      <article class="feature">
-        <div class="feature-grid">
+      <div class="sec-head"><h2 id="work-h">Selected work</h2><button type="button" class="expand-all" id="expandAll">Expand all</button></div>
+      <article class="card open" id="p-lakehouse">
+        <div class="card-head">
           <div class="meta"><span class="flag">Flagship</span><strong>Jul 2026</strong>Solo project</div>
-          <div>
+          <div class="card-title">
             <h3><a href="https://github.com/aaditya2504/streaming-lakehouse" target="_blank" rel="noopener">Streaming Lakehouse (CDC Pipeline)</a></h3>
             <p class="sub">Real-time change data capture for a banking ledger, across 8 Docker services.</p>
-            <ul>
-              <li>Streams every insert, update, and delete from Postgres through Debezium and Kafka into an append-only Iceberg Bronze log with Spark Structured Streaming.</li>
-              <li>Builds Silver and Gold models in dbt on Trino, with window-function deduplication, SHA-256 PII masking, and uniqueness, not-null, and accepted-values tests.</li>
-              <li>Automates Iceberg table maintenance: small-file compaction, manifest rewrites, and snapshot expiry.</li>
-            </ul>
             <p class="stack"><b>Stack:</b> Postgres, Debezium, Kafka, Spark, Iceberg, MinIO, Trino, dbt, Docker</p>
-            <div class="links"><a href="https://github.com/aaditya2504/streaming-lakehouse" target="_blank" rel="noopener">View the code</a></div>
           </div>
+          <button type="button" class="toggle" aria-expanded="true" aria-controls="p-lakehouse-d"><span class="t-label">Hide details</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
         </div>
-        <div class="shots">
-          <figure><img loading="lazy" src="https://raw.githubusercontent.com/aaditya2504/streaming-lakehouse/main/docs/screenshots/kafka-messages.png" alt="Kafka UI showing Debezium change events for the accounts table" onerror="this.closest('figure').remove()"><figcaption>CDC events arriving in Kafka</figcaption></figure>
-          <figure><img loading="lazy" src="https://raw.githubusercontent.com/aaditya2504/streaming-lakehouse/main/docs/screenshots/dbt-lineage.png" alt="dbt lineage graph from Bronze to Silver to Gold" onerror="this.closest('figure').remove()"><figcaption>dbt lineage, Bronze to Gold</figcaption></figure>
-          <figure><img loading="lazy" src="https://raw.githubusercontent.com/aaditya2504/streaming-lakehouse/main/docs/screenshots/gold-summary.png" alt="Gold account summary queried in Trino" onerror="this.closest('figure').remove()"><figcaption>Gold summary in Trino</figcaption></figure>
-        </div>
-      </article>
-
-      <article class="row">
-        <div class="meta"><strong>Oct 2026</strong>Solo project</div>
-        <div>
-          <h3><a href="https://github.com/aaditya2504/job-radar" target="_blank" rel="noopener">job-radar</a></h3>
-          <p class="sub">An internship discovery pipeline that runs on a schedule and pushes the best matches to my phone.</p>
-          <ul>
-            <li>Ingests 1,000+ postings from Simplify and Workday career sites, deduplicates them across sources, and drops roles that fail work-authorization rules before any scoring.</li>
-            <li>Scores fit against my resume with a free local skill matcher, with Claude scoring as an optional upgrade and automatic fallback.</li>
-            <li>Zero dependencies, 27 offline tests, and CI across Python 3.11 to 3.13.</li>
-          </ul>
-          <p class="stack"><b>Stack:</b> Python, Claude API, GitHub Actions, ntfy</p>
-        </div>
-      </article>
-
-      <article class="row">
-        <div class="meta"><strong>Jun 2026</strong>Team of 3</div>
-        <div>
-          <h3><a href="https://github.com/AkshatDhiman07/Airline-Intelligence" target="_blank" rel="noopener">Airline Intelligence Platform</a></h3>
-          <p class="sub">A serverless AWS analytics platform for flight delays. I owned ingestion and the data lake layers.</p>
-          <ul>
-            <li>Landed 3M historical BTS flight records and a live Aviationstack feed in a Hive-partitioned S3 data lake, with EventBridge triggering a Lambda ingester every 12 hours.</li>
-            <li>Kept API keys in Secrets Manager, scoped IAM roles per service, and exposed the lake to Athena SQL views with no copy step.</li>
-            <li>Runs for about $0.40 a month, because you only pay when data moves or queries run.</li>
-          </ul>
-          <p class="stack"><b>Stack:</b> AWS Lambda, EventBridge, S3, Athena, Secrets Manager, CloudWatch, IAM, Python</p>
-          <div class="links">
-            <a href="https://github.com/AkshatDhiman07/Airline-Intelligence" target="_blank" rel="noopener">View the code</a>
-            <a href="https://www.youtube.com/watch?v=ywQuLzKjexc" target="_blank" rel="noopener">Watch the demo</a>
-          </div>
-          <div class="shots" style="grid-template-columns: 1fr;">
-            <figure><img loading="lazy" src="https://github.com/AkshatDhiman07/Airline-Intelligence/raw/feature/dev-1.0/docs/Screenshots/system_architecture.png" alt="Airline Intelligence system architecture on AWS" onerror="this.closest('figure').remove()" style="aspect-ratio:auto; object-fit:contain;"><figcaption>System architecture</figcaption></figure>
+        <div class="details" id="p-lakehouse-d">
+          <div class="details-inner">
+            <div class="details-body">
+              <ul>
+                <li>Streams every insert, update, and delete from Postgres through Debezium and Kafka into an append-only Iceberg Bronze log with Spark Structured Streaming.</li>
+                <li>Builds Silver and Gold models in dbt on Trino, with window-function deduplication, SHA-256 PII masking, and uniqueness, not-null, and accepted-values tests.</li>
+                <li>Automates Iceberg table maintenance: small-file compaction, manifest rewrites, and snapshot expiry.</li>
+              </ul>
+              <div class="links">
+                <a href="https://github.com/aaditya2504/streaming-lakehouse" target="_blank" rel="noopener">View the code</a>
+              </div>
+              <div class="shots">
+                <figure><button type="button" class="shot-btn" aria-label="Enlarge: CDC events arriving in Kafka"><img loading="lazy" src="https://raw.githubusercontent.com/aaditya2504/streaming-lakehouse/main/docs/screenshots/kafka-messages.png" alt="Kafka UI showing Debezium change events for the accounts table" onerror="this.closest('figure').remove()"></button><figcaption>CDC events arriving in Kafka</figcaption></figure>
+                <figure><button type="button" class="shot-btn" aria-label="Enlarge: dbt lineage, Bronze to Gold"><img loading="lazy" src="https://raw.githubusercontent.com/aaditya2504/streaming-lakehouse/main/docs/screenshots/dbt-lineage.png" alt="dbt lineage graph from Bronze to Silver to Gold" onerror="this.closest('figure').remove()"></button><figcaption>dbt lineage, Bronze to Gold</figcaption></figure>
+                <figure><button type="button" class="shot-btn" aria-label="Enlarge: Gold summary in Trino"><img loading="lazy" src="https://raw.githubusercontent.com/aaditya2504/streaming-lakehouse/main/docs/screenshots/gold-summary.png" alt="Gold account summary queried in Trino" onerror="this.closest('figure').remove()"></button><figcaption>Gold summary in Trino</figcaption></figure>
+              </div>
+            </div>
           </div>
         </div>
       </article>
 
-      <article class="row">
-        <div class="meta"><strong>Apr 2026</strong>Solo project</div>
-        <div>
-          <h3><a href="https://github.com/aaditya2504/restaurant-analytics-db" target="_blank" rel="noopener">Restaurant Analytics Database</a></h3>
-          <p class="sub">Relational design, cloud ETL, and a concurrency experiment that shows why transactions matter.</p>
-          <ul>
-            <li>Designed a 3NF MySQL schema on Aiven Cloud and loaded 209K+ restaurant visits with an R ETL pipeline.</li>
-            <li>Ran 4 concurrent loaders with and without transactions, exposing read-then-write races that caused duplicate and partial inserts.</li>
-            <li>Built a 5-table star schema from the Sakila database with OLAP queries on revenue, category, and staff.</li>
-          </ul>
-          <p class="stack"><b>Stack:</b> MySQL, R, SQLite</p>
-          <div class="links"><a href="https://github.com/aaditya2504/restaurant-analytics-db" target="_blank" rel="noopener">View the code</a></div>
+      <article class="card" id="p-jobradar">
+        <div class="card-head">
+          <div class="meta"><strong>Oct 2026</strong>Solo project</div>
+          <div class="card-title">
+            <h3><a href="https://github.com/aaditya2504/job-radar" target="_blank" rel="noopener">job-radar</a></h3>
+            <p class="sub">An internship discovery pipeline that runs on a schedule and pushes the best matches to my phone.</p>
+            <p class="stack"><b>Stack:</b> Python, Claude API, GitHub Actions, ntfy</p>
+          </div>
+          <button type="button" class="toggle" aria-expanded="false" aria-controls="p-jobradar-d"><span class="t-label">Show details</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        </div>
+        <div class="details" id="p-jobradar-d" inert>
+          <div class="details-inner">
+            <div class="details-body">
+              <ul>
+                <li>Ingests 1,000+ postings from Simplify and Workday career sites, deduplicates them across sources, and drops roles that fail work-authorization rules before any scoring.</li>
+                <li>Scores fit against my resume with a free local skill matcher, with Claude scoring as an optional upgrade and automatic fallback.</li>
+                <li>Zero dependencies, 27 offline tests, and CI across Python 3.11 to 3.13.</li>
+              </ul>
+              <div class="links">
+                <a href="https://github.com/aaditya2504/job-radar" target="_blank" rel="noopener">View the code</a>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
 
-      <article class="row">
-        <div class="meta"><strong>Mar 2026</strong>Team of 5</div>
-        <div>
-          <h3><a href="https://github.com/aaditya2504/brfss-mental-health-analysis" target="_blank" rel="noopener">Social Determinants of Mental Health</a></h3>
-          <p class="sub">Survey-weighted analysis of 200K+ CDC BRFSS respondents across 33 states.</p>
-          <ul>
-            <li>Used survey-weighted regression, ANOVA with Tukey HSD, and ordinal logistic models with odds ratios.</li>
-            <li>Found loneliness to be the strongest modifiable predictor of poor mental health days.</li>
-          </ul>
-          <p class="stack"><b>Stack:</b> R, survey, R Markdown</p>
+      <article class="card" id="p-airline">
+        <div class="card-head">
+          <div class="meta"><strong>Jun 2026</strong>Team of 3</div>
+          <div class="card-title">
+            <h3><a href="https://github.com/AkshatDhiman07/Airline-Intelligence" target="_blank" rel="noopener">Airline Intelligence Platform</a></h3>
+            <p class="sub">A serverless AWS analytics platform for flight delays. I owned ingestion and the data lake layers.</p>
+            <p class="stack"><b>Stack:</b> AWS Lambda, EventBridge, S3, Athena, Secrets Manager, CloudWatch, IAM, Python</p>
+          </div>
+          <button type="button" class="toggle" aria-expanded="false" aria-controls="p-airline-d"><span class="t-label">Show details</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        </div>
+        <div class="details" id="p-airline-d" inert>
+          <div class="details-inner">
+            <div class="details-body">
+              <ul>
+                <li>Landed 3M historical BTS flight records and a live Aviationstack feed in a Hive-partitioned S3 data lake, with EventBridge triggering a Lambda ingester every 12 hours.</li>
+                <li>Kept API keys in Secrets Manager, scoped IAM roles per service, and exposed the lake to Athena SQL views with no copy step.</li>
+                <li>Runs for about $0.40 a month, because you only pay when data moves or queries run.</li>
+              </ul>
+              <div class="links">
+                <a href="https://github.com/AkshatDhiman07/Airline-Intelligence" target="_blank" rel="noopener">View the code</a>
+                <a href="https://www.youtube.com/watch?v=ywQuLzKjexc" target="_blank" rel="noopener">Watch the demo</a>
+              </div>
+              <div class="shots one">
+                <figure><button type="button" class="shot-btn" aria-label="Enlarge: System architecture"><img loading="lazy" src="https://github.com/AkshatDhiman07/Airline-Intelligence/raw/feature/dev-1.0/docs/Screenshots/system_architecture.png" alt="Airline Intelligence system architecture on AWS" onerror="this.closest('figure').remove()"></button><figcaption>System architecture</figcaption></figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" id="p-restaurant">
+        <div class="card-head">
+          <div class="meta"><strong>Apr 2026</strong>Solo project</div>
+          <div class="card-title">
+            <h3><a href="https://github.com/aaditya2504/restaurant-analytics-db" target="_blank" rel="noopener">Restaurant Analytics Database</a></h3>
+            <p class="sub">Relational design, cloud ETL, and a concurrency experiment that shows why transactions matter.</p>
+            <p class="stack"><b>Stack:</b> MySQL, R, SQLite</p>
+          </div>
+          <button type="button" class="toggle" aria-expanded="false" aria-controls="p-restaurant-d"><span class="t-label">Show details</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        </div>
+        <div class="details" id="p-restaurant-d" inert>
+          <div class="details-inner">
+            <div class="details-body">
+              <ul>
+                <li>Designed a 3NF MySQL schema on Aiven Cloud and loaded 209K+ restaurant visits with an R ETL pipeline.</li>
+                <li>Ran 4 concurrent loaders with and without transactions, exposing read-then-write races that caused duplicate and partial inserts.</li>
+                <li>Built a 5-table star schema from the Sakila database with OLAP queries on revenue, category, and staff.</li>
+              </ul>
+              <div class="links">
+                <a href="https://github.com/aaditya2504/restaurant-analytics-db" target="_blank" rel="noopener">View the code</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" id="p-brfss">
+        <div class="card-head">
+          <div class="meta"><strong>Mar 2026</strong>Team of 5</div>
+          <div class="card-title">
+            <h3><a href="https://github.com/aaditya2504/brfss-mental-health-analysis" target="_blank" rel="noopener">Social Determinants of Mental Health</a></h3>
+            <p class="sub">Survey-weighted analysis of 200K+ CDC BRFSS respondents across 33 states.</p>
+            <p class="stack"><b>Stack:</b> R, survey, R Markdown</p>
+          </div>
+          <button type="button" class="toggle" aria-expanded="false" aria-controls="p-brfss-d"><span class="t-label">Show details</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        </div>
+        <div class="details" id="p-brfss-d" inert>
+          <div class="details-inner">
+            <div class="details-body">
+              <ul>
+                <li>Used survey-weighted regression, ANOVA with Tukey HSD, and ordinal logistic models with odds ratios.</li>
+                <li>Found loneliness to be the strongest modifiable predictor of poor mental health days.</li>
+              </ul>
+              <div class="links">
+                <a href="https://github.com/aaditya2504/brfss-mental-health-analysis" target="_blank" rel="noopener">View the code</a>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
     </section>
@@ -488,6 +584,12 @@
   <footer><span>Aaditya Kumar Singh, Boston</span><span>Last updated October 2026</span></footer>
 </div>
 
+<dialog class="lightbox" id="lightbox" aria-label="Enlarged screenshot">
+  <button type="button" class="close" id="lbClose" aria-label="Close">&times;</button>
+  <img id="lbImg" alt="">
+  <p id="lbCap"></p>
+</dialog>
+
 <script>
   (function () {
     var btn = document.getElementById("themeBtn");
@@ -505,6 +607,48 @@
       label();
     });
     label();
+
+    // Expandable project cards
+    var cards = Array.prototype.slice.call(document.querySelectorAll(".card"));
+    function setOpen(card, open) {
+      card.classList.toggle("open", open);
+      var btn = card.querySelector(".toggle");
+      var det = card.querySelector(".details");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      btn.querySelector(".t-label").textContent = open ? "Hide details" : "Show details";
+      if (open) det.removeAttribute("inert"); else det.setAttribute("inert", "");
+      syncAll();
+    }
+    var allBtn = document.getElementById("expandAll");
+    function syncAll() {
+      if (!allBtn) return;
+      var allOpen = cards.every(function (c) { return c.classList.contains("open"); });
+      allBtn.textContent = allOpen ? "Collapse all" : "Expand all";
+    }
+    cards.forEach(function (card) {
+      card.querySelector(".card-head").addEventListener("click", function (e) {
+        if (e.target.closest("a")) return;            // title links still open the repo
+        setOpen(card, !card.classList.contains("open"));
+      });
+    });
+    if (allBtn) allBtn.addEventListener("click", function () {
+      var open = !cards.every(function (c) { return c.classList.contains("open"); });
+      cards.forEach(function (c) { setOpen(c, open); });
+    });
+    syncAll();
+
+    // Screenshot lightbox
+    var lb = document.getElementById("lightbox"), lbImg = document.getElementById("lbImg"), lbCap = document.getElementById("lbCap");
+    document.querySelectorAll(".shot-btn").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var img = b.querySelector("img"); var cap = b.parentElement.querySelector("figcaption");
+        lbImg.src = img.src; lbImg.alt = img.alt; lbCap.textContent = cap ? cap.textContent : "";
+        if (lb.showModal) lb.showModal(); else window.open(img.src, "_blank");
+      });
+    });
+    document.getElementById("lbClose").addEventListener("click", function () { lb.close(); });
+    lb.addEventListener("click", function (e) { if (e.target === lb) lb.close(); });
+
     // If the headshot already failed before this script ran, apply the fallback
     var img = document.querySelector("#photo img");
     if (img && img.complete && img.naturalWidth === 0) document.getElementById("photo").classList.add("fallback");
