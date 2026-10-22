@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Aaditya Kumar Singh | Data Engineer</title>
-<meta name="description" content="Data engineer with 5+ years of production pipelines for Citibank and Commonwealth Bank of Australia. MS Data Science at Northeastern. Open to Spring or Fall 2027 data engineering co-ops.">
-<meta property="og:title" content="Aaditya Kumar Singh | Data Engineer">
-<meta property="og:description" content="Streaming lakehouses, bank-scale ETL, and data modeling. MS Data Science at Northeastern.">
+<title>Aaditya Kumar Singh | Full-Stack Data Engineer</title>
+<meta name="description" content="Full-stack data engineer: 5+ years of production pipelines for Citibank and Commonwealth Bank of Australia, plus analytics and applied AI. MS Data Science at Northeastern. Open to Spring or Fall 2027 co-ops.">
+<meta property="og:title" content="Aaditya Kumar Singh | Full-Stack Data Engineer">
+<meta property="og:description" content="Pipelines, data modeling, analytics, and applied AI. MS Data Science at Northeastern.">
 <meta property="og:type" content="profile">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌊</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -291,6 +291,12 @@
   /* Company and school links */
   a.co { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-decoration-thickness: 2px; text-underline-offset: 4px; }
   a.co:hover { text-decoration-color: var(--accent); }
+
+  /* Email copied toast */
+  .toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); opacity: 0;
+    background: var(--ink); color: var(--bg); padding: 12px 18px; border-radius: 12px; font-weight: 600; font-size: 0.95rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25); pointer-events: none; transition: opacity .2s ease, transform .2s ease; z-index: 50; max-width: calc(100vw - 32px); text-align: center; }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
 </style>
 </head>
 <body>
@@ -317,9 +323,9 @@
   <main id="main">
     <div class="hero">
       <div>
-        <a class="status" href="#contact"><span class="dot" aria-hidden="true"></span>Open to data engineering co-ops, Spring or Fall 2027</a>
-        <h1>I build the pipelines decisions run on.</h1>
-        <p class="lede">Data engineer and ETL developer with <strong>5+ years</strong> of production pipelines for <strong>Citibank</strong> and <strong>Commonwealth Bank of Australia</strong>. Now an MS Data Science student at Northeastern, building streaming systems in the open.</p>
+        <a class="status" href="#contact"><span class="dot" aria-hidden="true"></span>Open to data co-ops, Spring or Fall 2027</a>
+        <h1>Full-stack data, from pipelines to AI.</h1>
+        <p class="lede">I build the pipelines, model the data, analyze it, and wire in AI where it earns its place. <strong>5+ years</strong> of production data engineering for <strong>Citibank</strong> and <strong>Commonwealth Bank of Australia</strong>, now an MS Data Science student at Northeastern.</p>
         <div class="actions">
           <a class="btn primary" href="AKS-Resume-Oct2026.pdf" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 12v6"/><path d="m9 15 3 3 3-3"/></svg>
@@ -364,7 +370,7 @@
     </div>
 
     <section aria-labelledby="focus-h">
-      <div class="sec-head"><h2 id="focus-h">What I do</h2><p>Click any area to see where I’ve done it.</p></div>
+      <div class="sec-head"><h2 id="focus-h">What I do</h2><p>Engineering at the core, analytics and AI on top. Click any area to see where I’ve done it.</p></div>
       <div class="fgrid">
         <article class="fcard" id="f-batch">
           <button type="button" class="fcard-head" aria-expanded="false" aria-controls="f-batch-d">
@@ -423,6 +429,35 @@
               <ul class="proof-list">
                 <li><a class="proof-link" href="#exp-synechron">Synechron, for Commonwealth Bank of Australia</a><span>50+ Oracle and Teradata procedures 40% faster, Athena queries 30% faster</span></li>
                 <li><a class="proof-link" href="#p-lakehouse">Streaming Lakehouse</a><span>Iceberg compaction and snapshot expiry to keep scans fast</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <article class="fcard" id="f-analytics">
+          <button type="button" class="fcard-head" aria-expanded="false" aria-controls="f-analytics-d">
+            <span class="ficon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+            <span class="ftext"><span class="ftitle">Analytics and data science</span><span class="fdesc">Turning clean data into answers: statistical models, survey weighting, and OLAP queries that hold up to scrutiny.</span></span>
+            <span class="fmore"><span class="f-label">See the proof</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+          </button>
+          <div class="details" id="f-analytics-d" inert>
+            <div class="details-inner">
+              <ul class="proof-list">
+                <li><a class="proof-link" href="#p-brfss">Social Determinants of Mental Health</a><span>Survey-weighted regression and ordinal models on 200K+ BRFSS respondents</span></li>
+                <li><a class="proof-link" href="#p-restaurant">Restaurant Analytics Database</a><span>OLAP queries on revenue, category, and staff over a star schema</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <article class="fcard" id="f-ai">
+          <button type="button" class="fcard-head" aria-expanded="false" aria-controls="f-ai-d">
+            <span class="ficon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></span>
+            <span class="ftext"><span class="ftitle">Applied AI</span><span class="fdesc">Using LLMs where they beat rules, with structured output, cost caps, and a deterministic fallback when the model isn’t available.</span></span>
+            <span class="fmore"><span class="f-label">See the proof</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+          </button>
+          <div class="details" id="f-ai-d" inert>
+            <div class="details-inner">
+              <ul class="proof-list">
+                <li><a class="proof-link" href="#p-jobradar">job-radar</a><span>Claude scores job fit as structured JSON, with a free local scorer as fallback</span></li>
               </ul>
             </div>
           </div>
@@ -648,20 +683,21 @@
     </section>
 
     <section id="skills" aria-labelledby="skills-h">
-      <div class="sec-head"><h2 id="skills-h">What I work with</h2><p>Grouped by the job each tool does.</p></div>
+      <div class="sec-head"><h2 id="skills-h">What I work with</h2><p>Across the full data stack, grouped by job.</p></div>
       <div class="skills">
         <div><h3>Languages</h3><p>Python, SQL, PL/SQL, R, Java, Bash</p></div>
         <div><h3>Streaming and CDC</h3><p>Kafka, Debezium, Spark Structured Streaming</p></div>
         <div><h3>Processing and modeling</h3><p>Spark, dbt, Informatica, dimensional modeling, star schemas</p></div>
         <div><h3>Storage and query</h3><p>PostgreSQL, Oracle, Teradata, MySQL, Snowflake, Iceberg, Trino</p></div>
         <div><h3>Cloud and tooling</h3><p>AWS (S3, Glue, Athena, Lambda, Redshift, EventBridge), Docker, Git, GitHub Actions, Linux</p></div>
-        <div><h3>Analysis and AI</h3><p>pandas, NumPy, scikit-learn, Claude API, Tableau, Power BI</p></div>
+        <div><h3>Data science and analytics</h3><p>pandas, NumPy, scikit-learn, statistical modeling, Tableau, Power BI</p></div>
+        <div><h3>AI and LLMs</h3><p>Claude and OpenAI APIs, prompt engineering, structured output, LLM automation</p></div>
       </div>
     </section>
 
     <div class="contact" id="contact">
-      <h2>Need a data engineer who has run pipelines in production?</h2>
-      <p>I’m looking for a data engineering or analytics engineering co-op for Spring 2027 (January to June) or Fall 2027 (July to December). Available from January 2027 on CPT. The fastest way to reach me is email.</p>
+      <h2>Need someone who can take data from source to AI?</h2>
+      <p>I’m looking for a data engineering, analytics engineering, or data science co-op for Spring 2027 (January to June) or Fall 2027 (July to December). Available from January 2027 on CPT. The fastest way to reach me is email.</p>
       <a class="email" href="mailto:singh.aadit@northeastern.edu">singh.aadit@northeastern.edu</a>
       <div class="actions">
         <a class="btn" href="AKS-Resume-Oct2026.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
@@ -674,6 +710,7 @@
   <footer><span>Aaditya Kumar Singh, Boston</span><span>Last updated October 2026</span></footer>
 </div>
 
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <dialog class="lightbox" id="lightbox" aria-label="Enlarged screenshot">
   <button type="button" class="close" id="lbClose" aria-label="Close">&times;</button>
   <img id="lbImg" alt="">
@@ -748,6 +785,28 @@
         target.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
         target.classList.remove("flash"); void target.offsetWidth; target.classList.add("flash");
         setTimeout(function () { target.classList.remove("flash"); }, 1700);
+      });
+    });
+
+
+    // Email links: copy the address too, so they work without a mail app
+    var toast = document.getElementById("toast"), toastTimer;
+    function showToast(msg) {
+      toast.textContent = msg; toast.classList.add("show");
+      clearTimeout(toastTimer); toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 2600);
+    }
+    function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+      return new Promise(function (res, rej) {
+        var ta = document.createElement("textarea"); ta.value = text; ta.setAttribute("readonly", "");
+        ta.style.position = "fixed"; ta.style.opacity = "0"; document.body.appendChild(ta); ta.select();
+        try { document.execCommand("copy") ? res() : rej(); } catch (e) { rej(e); } document.body.removeChild(ta);
+      });
+    }
+    document.querySelectorAll('a[href^="mailto:"]').forEach(function (a) {
+      a.addEventListener("click", function () {
+        var addr = a.getAttribute("href").replace("mailto:", "").split("?")[0];
+        copyText(addr).then(function () { showToast("Email copied: " + addr); }, function () { showToast(addr); });
       });
     });
 
