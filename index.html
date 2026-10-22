@@ -258,6 +258,35 @@
   .lightbox p { color: #E7EDF6; text-align: center; margin: 12px 0 0; font-size: 0.95rem; }
   .lightbox .close { position: fixed; top: calc(16px + env(safe-area-inset-top, 0px)); right: 16px; width: 44px; height: 44px; border-radius: 50%;
     border: 1px solid rgba(255,255,255,.3); background: rgba(8,14,25,.6); color: #fff; font-size: 1.4rem; cursor: pointer; line-height: 1; }
+
+  /* What I do: interactive focus cards */
+  .fgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 16px; }
+  .fcard { background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; align-self: start; }
+  .fcard:hover, .fcard.open { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); box-shadow: 0 10px 28px rgba(18, 35, 59, .08); }
+  @media (prefers-reduced-motion: no-preference) { .fcard:hover { transform: translateY(-2px); } }
+  .fcard-head { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; width: 100%; text-align: left; font: inherit; color: inherit;
+    background: none; border: 0; padding: clamp(20px, 3vw, 26px); cursor: pointer; border-radius: 18px; }
+  .ficon { grid-row: span 2; width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); color: var(--ink); display: grid; place-items: center; }
+  .ficon svg { width: 22px; height: 22px; }
+  .ftext { display: flex; flex-direction: column; gap: 6px; }
+  .ftitle { font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
+  .fdesc { color: var(--muted); }
+  .fmore { grid-column: 2; display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-weight: 600; font-size: 0.92rem; color: var(--link); }
+  .fmore svg { width: 16px; height: 16px; transition: transform .25s ease; }
+  .fcard.open .fmore svg { transform: rotate(180deg); }
+  .fcard.open .details { grid-template-rows: 1fr; }
+  .proof-list { list-style: none; margin: 0; padding: 0 clamp(20px, 3vw, 26px) clamp(20px, 3vw, 26px) calc(clamp(20px, 3vw, 26px) + 60px); display: grid; gap: 12px; }
+  .proof-list li { display: flex; flex-direction: column; gap: 2px; padding-left: 14px; border-left: 2px solid var(--accent); }
+  .proof-list a { font-weight: 700; color: var(--ink); text-decoration-color: var(--line); text-decoration-thickness: 2px; }
+  .proof-list a:hover { text-decoration-color: var(--accent); }
+  .proof-list span { color: var(--muted); font-size: 0.94rem; }
+  @keyframes flash { 0% { box-shadow: 0 0 0 0 var(--accent); } 30% { box-shadow: 0 0 0 4px var(--accent); } 100% { box-shadow: 0 0 0 0 transparent; } }
+  .flash { animation: flash 1.6s ease-out; border-radius: 18px; }
+  @media (max-width: 760px) {
+    .fgrid { grid-template-columns: 1fr; }
+    .proof-list { padding-left: clamp(20px, 3vw, 26px); }
+  }
 </style>
 </head>
 <body>
@@ -331,12 +360,69 @@
     </div>
 
     <section aria-labelledby="focus-h">
-      <div class="sec-head"><h2 id="focus-h">What I do</h2><p>The work I’ve done in production and in the open.</p></div>
-      <div class="focus">
-        <div><h3>Batch ETL at bank scale</h3><p>5+ years of SQL, PL/SQL, and Informatica pipelines for trade reconciliation and regulatory data, where a missed run is a business problem.</p></div>
-        <div><h3>Streaming and change data capture</h3><p>Moving every insert, update, and delete from operational databases into a lakehouse without touching the source’s query load.</p></div>
-        <div><h3>Data modeling and quality</h3><p>Normalized schemas, star schemas, and medallion layers, with tests that catch bad data before anyone builds a report on it.</p></div>
-        <div><h3>Query performance</h3><p>Reading execution plans to find the full scan or bad join order. It’s how 50+ stored procedures got 40% faster.</p></div>
+      <div class="sec-head"><h2 id="focus-h">What I do</h2><p>Click any area to see where I’ve done it.</p></div>
+      <div class="fgrid">
+        <article class="fcard" id="f-batch">
+          <button type="button" class="fcard-head" aria-expanded="false" aria-controls="f-batch-d">
+            <span class="ficon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>
+            <span class="ftext"><span class="ftitle">Batch ETL at bank scale</span><span class="fdesc">5+ years of SQL, PL/SQL, and Informatica pipelines for trade reconciliation and regulatory data, where a missed run is a business problem.</span></span>
+            <span class="fmore"><span class="f-label">See the proof</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+          </button>
+          <div class="details" id="f-batch-d" inert>
+            <div class="details-inner">
+              <ul class="proof-list">
+                <li><a class="proof-link" href="#exp-synechron">Synechron, for Commonwealth Bank of Australia</a><span>12+ pipelines, 500K+ records a day, 25% higher throughput</span></li>
+                <li><a class="proof-link" href="#exp-empaxis">Empaxis, for Citibank</a><span>Trade reconciliation at 200K+ daily transactions, 60% less manual work</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <article class="fcard" id="f-stream">
+          <button type="button" class="fcard-head" aria-expanded="false" aria-controls="f-stream-d">
+            <span class="ficon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></span>
+            <span class="ftext"><span class="ftitle">Streaming and change data capture</span><span class="fdesc">Moving every insert, update, and delete from operational databases into a lakehouse without touching the source’s query load.</span></span>
+            <span class="fmore"><span class="f-label">See the proof</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+          </button>
+          <div class="details" id="f-stream-d" inert>
+            <div class="details-inner">
+              <ul class="proof-list">
+                <li><a class="proof-link" href="#p-lakehouse">Streaming Lakehouse</a><span>Postgres to Iceberg through Debezium, Kafka, and Spark Structured Streaming</span></li>
+                <li><a class="proof-link" href="#p-airline">Airline Intelligence Platform</a><span>Live flight API feed landed on a 12-hour EventBridge and Lambda schedule</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <article class="fcard" id="f-model">
+          <button type="button" class="fcard-head" aria-expanded="false" aria-controls="f-model-d">
+            <span class="ficon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="8.5" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 10v2h11v-2M12 12v2"/></svg></span>
+            <span class="ftext"><span class="ftitle">Data modeling and quality</span><span class="fdesc">Normalized schemas, star schemas, and medallion layers, with tests that catch bad data before anyone builds a report on it.</span></span>
+            <span class="fmore"><span class="f-label">See the proof</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+          </button>
+          <div class="details" id="f-model-d" inert>
+            <div class="details-inner">
+              <ul class="proof-list">
+                <li><a class="proof-link" href="#p-lakehouse">Streaming Lakehouse</a><span>Bronze, Silver, and Gold layers in dbt with uniqueness and accepted-values tests</span></li>
+                <li><a class="proof-link" href="#p-restaurant">Restaurant Analytics Database</a><span>3NF MySQL schema and a 5-table Sakila star schema</span></li>
+                <li><a class="proof-link" href="#exp-empaxis">Empaxis, for Citibank</a><span>Normalized Oracle schemas that sped up reporting 35%</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <article class="fcard" id="f-perf">
+          <button type="button" class="fcard-head" aria-expanded="false" aria-controls="f-perf-d">
+            <span class="ficon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 13l4-4"/><path d="M3.5 18a9 9 0 1 1 17 0"/></svg></span>
+            <span class="ftext"><span class="ftitle">Query performance</span><span class="fdesc">Reading execution plans to find the full scan or bad join order. It’s how 50+ stored procedures got 40% faster.</span></span>
+            <span class="fmore"><span class="f-label">See the proof</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+          </button>
+          <div class="details" id="f-perf-d" inert>
+            <div class="details-inner">
+              <ul class="proof-list">
+                <li><a class="proof-link" href="#exp-synechron">Synechron, for Commonwealth Bank of Australia</a><span>50+ Oracle and Teradata procedures 40% faster, Athena queries 30% faster</span></li>
+                <li><a class="proof-link" href="#p-lakehouse">Streaming Lakehouse</a><span>Iceberg compaction and snapshot expiry to keep scans fast</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -484,7 +570,7 @@
     <section id="experience" aria-labelledby="exp-h">
       <div class="sec-head"><h2 id="exp-h">Experience</h2><p>5+ years in financial services data.</p></div>
 
-      <article class="row">
+      <article class="row" id="exp-synechron">
         <div class="meta"><strong>Mar 2024 – Sep 2025</strong>Bengaluru, India</div>
         <div>
           <h3>Senior Data Management Analyst, Synechron</h3>
@@ -498,7 +584,7 @@
         </div>
       </article>
 
-      <article class="row">
+      <article class="row" id="exp-empaxis">
         <div class="meta"><strong>Dec 2019 – Mar 2024</strong>Noida, India</div>
         <div>
           <h3>Team Lead / ETL Developer, Empaxis Data Management</h3>
@@ -636,6 +722,30 @@
       cards.forEach(function (c) { setOpen(c, open); });
     });
     syncAll();
+
+
+    // What I do: expandable focus cards with proof links
+    document.querySelectorAll(".fcard").forEach(function (fc) {
+      var head = fc.querySelector(".fcard-head"), det = fc.querySelector(".details"), lab = fc.querySelector(".f-label");
+      head.addEventListener("click", function () {
+        var open = !fc.classList.contains("open");
+        fc.classList.toggle("open", open);
+        head.setAttribute("aria-expanded", open ? "true" : "false");
+        lab.textContent = open ? "Hide the proof" : "See the proof";
+        if (open) det.removeAttribute("inert"); else det.setAttribute("inert", "");
+      });
+    });
+    document.querySelectorAll(".proof-link").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        var target = document.getElementById(a.getAttribute("href").slice(1));
+        if (!target) return;
+        e.preventDefault();
+        if (target.classList.contains("card") && !target.classList.contains("open")) setOpen(target, true);
+        target.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+        target.classList.remove("flash"); void target.offsetWidth; target.classList.add("flash");
+        setTimeout(function () { target.classList.remove("flash"); }, 1700);
+      });
+    });
 
     // Screenshot lightbox
     var lb = document.getElementById("lightbox"), lbImg = document.getElementById("lbImg"), lbCap = document.getElementById("lbCap");
